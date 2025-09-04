@@ -1,0 +1,30 @@
+import { createContext, useState, useEffect } from 'react';
+import { account } from './lib/appwrite'
+import { lightTheme, darkTheme } from '.styles/theme';
+
+export const AuthContext = createContext();
+
+export const AuthProvider = ({ children }) => {
+    const [isLoggedIn, setIsLoggedIn] = useState(null);
+
+    useEffect(() => {
+        const checkLoggedIn = async () => {
+            try {
+                const user = await account.get();
+                setIsLoggedIn(true)
+            }catch (error) {
+                setIsLoggedIn(false);
+            }
+        }
+        checkLoggedIn();
+    }, []);
+
+    return (
+        <AuthContext.Provider value ={{
+            isLoggedIn,
+            setIsLoggedIn
+        }}>
+            {children}
+        </AuthContext.Provider>
+    )
+}

@@ -6,4 +6,4 @@ const client = new Client()
 
 const database = new Databases(client);
 const account = new Account(client);
-export {ID, client, database, account};
+export { ID, client, database, account };
