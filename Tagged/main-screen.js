@@ -4,7 +4,7 @@ import { View, Text, Image, Pressable } from "react-native";
 
 // import local components here
 
-export default function SignUp() {
+export default function MainScreen() {
   return (
     <View 
       style={StyleSheet.screenContainer}>
