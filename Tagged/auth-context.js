@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
-import { account } from './lib/appwrite'
-import { lightTheme, darkTheme } from '.styles/theme';
+import { account } from './lib/app-write';
 
 export const AuthContext = createContext();
 

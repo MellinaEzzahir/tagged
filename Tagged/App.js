@@ -2,6 +2,8 @@
 import React, { useContext } from 'react';
 import { AuthProvider, AuthContext } from './auth-context';
 import { createNativeStackNavigator } from '@react-navigation/stack'
+import 'react-native-get-random-values';
+import 'react-native-url-polyfill/auto';
 
 //components
 import LoginScreen from './login/login-screen';
