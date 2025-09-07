@@ -1,4 +1,4 @@
-import StyleSheet from '../styles/global-stylesheet'
+import styles from '../styles/global-stylesheet'
 import { useState, useContext } from "react";
 import { View, Text, TextInput, Pressable, Alert } from "react-native";
 import { useNavigation } from '@react-navigation/native';
@@ -25,10 +25,10 @@ export default function LoginScreen() {
     };
 
     return (
-        <View style={StyleSheet.screenContainer}>
-            <Text style={StyleSheet.loginTitle}>Welcome Back!</Text>
+        <View style={styles.screenContainer}>
+            <Text style={styles.loginTitle}>Welcome Back!</Text>
             <TextInput
-                style={StyleSheet.loginUsername}
+                style={styles.loginUsername}
                 placeholder='email'
                 placeholderTextColor="#888"
                 value={email}
@@ -36,7 +36,7 @@ export default function LoginScreen() {
                 autoCapitalize="none"
             />
             <TextInput
-                style={StyleSheet.loginPassword}
+                style={styles.loginPassword}
                 placeholder='password'
                 placeholderTextColor="#888"
                 secureTextEntry
@@ -45,14 +45,14 @@ export default function LoginScreen() {
                 autoCapitalize="none"
             />
 
-            <Pressable style={StyleSheet.loginSubmit} onPress={handleLogin}>
-                <Text style={StyleSheet.loginSubmitText}>Login</Text>
+            <Pressable style={styles.loginSubmit} onPress={handleLogin}>
+                <Text style={styles.loginSubmitText}>Login</Text>
             </Pressable>
             <Pressable onPress={() => navigation.navigate('SignUp')}>
-                <Text style={StyleSheet.footerText}>Sign up instead</Text>
+                <Text style={styles.footerText}>Sign up instead</Text>
             </Pressable>
             <Pressable>
-                <Text style={StyleSheet.footerText}>Forgot your password?</Text>
+                <Text style={styles.footerText}>Forgot your password?</Text>
             </Pressable>
         </View>
     );

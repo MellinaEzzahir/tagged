@@ -12,6 +12,7 @@ export const AuthProvider = ({ children }) => {
                 const user = await account.get();
                 setIsLoggedIn(true)
             }catch (error) {
+                console.log("Auth check failed:", error.message);
                 setIsLoggedIn(false);
             }
         }

@@ -1,7 +1,8 @@
 //libraries
 import React, { useContext } from 'react';
 import { AuthProvider, AuthContext } from './auth-context';
-import { createNativeStackNavigator } from '@react-navigation/stack'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
 import 'react-native-get-random-values';
 import 'react-native-url-polyfill/auto';
 
