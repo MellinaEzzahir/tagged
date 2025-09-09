@@ -4,7 +4,6 @@ import { useState, useEffect, useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { account, ID } from 'appwrite';
 import { AuthContext } from '../auth-context';
-import { endAsyncEvent } from 'react-native/Libraries/Performance/Systrace';
 
 export default function SignUpScreen() {
     const navigation = useNavigation();
@@ -41,7 +40,22 @@ export default function SignUpScreen() {
     }, [email]);
 
     useEffect(() => {
-        if ((password !=='' || email !== '') && name === ''){
+        const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
+        const isValidPassword = passwordRegex.test(password);
+        if (password === '') {
+            setPasswordError('');
+            setValidPassword(false);
+        } else if (isValidPassword) {
+            setPasswordError('');
+            setValidPassword(true);
+        } else {
+            setPasswordError('Password must be at least 8 characters, include a number and a special character.');
+            setValidPassword(false);
+        }
+    }, [password]);
+
+    useEffect(() => {
+        if ((password !== '' || email !== '') && name === '') {
             setNameError('Name cannot be empty');
             setValidName(false);
         } else {
@@ -50,22 +64,25 @@ export default function SignUpScreen() {
         }
     }, [password, email, name]);
 
-    useEffect(()=> {
+    useEffect(() => {
         const isEverythingValid = validEmail && validPassword && name.trim() !== '';
         setValidLogin(isEverythingValid);
-    }, [validEmail, validPassword]);
+    }, [validEmail, validPassword, name]);
 
     const handleSignUp = async () => {
+        console.log("handleSignUp called, validLogin:", validLogin);
         if (validLogin) {
+            console.log("got somewhere")
             try {
                 await account.create(ID.unique(), email, password, name);
                 await account.createEmailSession(email, password);
+                console.log("we're here")
                 Alert.alert("Success", "Account created!");
                 setIsLoggedIn(true);
             } catch (error) {
                 if (error.code === 409) {
                     try {
-                        await account.createEmailSession(email, password);
+                        await account.createEmailPasswordSession(email, password);
                         Alert.alert("Welcome back!");
                         setIsLoggedIn(true);
                     } catch (loginError) {
@@ -99,6 +116,7 @@ export default function SignUpScreen() {
                 value={email}
                 onChangeText={setEmail}
                 autoCapitalize="none"
+                id='email'
             />
             {emailError ? <Text style={styles.wrongSignUpInfo}>{emailError}</Text> : null}
 
@@ -109,6 +127,7 @@ export default function SignUpScreen() {
                 value={name}
                 onChangeText={setName}
                 autoCapitalize="none"
+                id='name'
             />
             {nameError ? <Text style={styles.wrongSignUpInfo}>{nameError}</Text> : null}
 
@@ -120,11 +139,12 @@ export default function SignUpScreen() {
                 value={password}
                 onChangeText={setPassword}
                 autoCapitalize="none"
+                id='password'
             />
             {passwordError ? <Text style={styles.wrongSignUpInfo}>{passwordError}</Text> : null}
 
             <Pressable
-                style={[styles.loginSubmit, { backgroundColor: validLogin ? '#4C5C3A' : '#8DB58' }]}
+                style={[styles.loginSubmit, { backgroundColor: validLogin ? '#4C5C3A' : '#8DB581' }]}
                 onPress={handleSignUp}
             >
                 <Text style={styles.loginSubmitText}>Sign up</Text>
