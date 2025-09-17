@@ -2,7 +2,7 @@ import styles from '../styles/global-stylesheet'
 import { useState, useContext } from "react";
 import { View, Text, TextInput, Pressable, Alert } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import { account } from '../lib/app-write';
+import { account, ID } from '../lib/app-write';
 import { AuthContext } from '../auth-context';
 
 export default function LoginScreen() {
@@ -20,13 +20,28 @@ export default function LoginScreen() {
             );
             setIsLoggedIn(true);
         } catch (err) {
-            alert('Login failed! ' + err.message)
+            Alert.alert('Login failed! ' + err.message)
         }
     };
+
+    const demoLogin = async () => {
+        try {
+            const create = await account.createEmailPasswordSession(
+                'demo@demoemail.com',
+                'bWwb@agvNx6jshx'
+            );
+            setIsLoggedIn(true);
+        } catch (err) {
+            Alert.alert('Login failed! ' + err.message)
+        }
+    }
 
     return (
         <View style={styles.screenContainer}>
             <Text style={styles.loginTitle}>Welcome Back!</Text>
+            <Pressable onPress={demoLogin}>
+                <Text style={styles.footerText}>Use demo account instead</Text>
+            </Pressable>
             <TextInput
                 style={styles.loginUsername}
                 placeholder='email'

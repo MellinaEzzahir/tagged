@@ -22,7 +22,7 @@ export default StyleSheet.create({
         height: 70,
         paddingTop: 25,
         paddingHorizontal: 15,
-        backgroundColor: theme.colors.primary,
+        backgroundColor: theme.colors.pr,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -73,7 +73,7 @@ export default StyleSheet.create({
         backgroundColor: theme.colors.secondary,
         paddiingVertical: 16,
         paddingHorizontal: 32,
-        borderRadius: 16,
+        borRadius: 16,
         elevation:  4,
         marginBottom: 16,
     },
@@ -110,5 +110,33 @@ export default StyleSheet.create({
         marginBottom: 12,
         marginLeft: 4,
         fontSize: 14,
+    },
+
+    imageCard: {
+        width: '95%',
+        marginBottom: 12,
+        marginLeft: 10,
+        backgroundColor: theme.colors.primary,
+        borderRadius: 16,
+        padding: 16,
+        boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+        elevation: 2,
+    },
+
+    imageCardName: {
+        fontSize: 18,
+        color: 'white',
+        fontWeight: 'bold',
+    },
+
+    modal: {
+        width: 530,
+        marginBottom: 12,
+        marginLeft: 10,
+        backgroundColor: theme.colors.primary,
+        borderRadius: 16,
+        padding: 16,
+        boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+        elevation: 2,
     }
 })

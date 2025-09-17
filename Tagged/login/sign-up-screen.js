@@ -74,10 +74,22 @@ export default function SignUpScreen() {
         if (validLogin) {
             console.log("got somewhere")
             try {
-                await account.create(ID.unique(), email, password, name);
-                await account.createEmailSession(email, password);
+                console.log('try')
+
+                const create = await account.create(
+                    ID.unique(),
+                    email,
+                    password,
+                    name
+                );
+
+
+                const login = await account.createEmailPasswordSession(email, password);
+
                 console.log("we're here")
                 Alert.alert("Success", "Account created!");
+                console.log(create);
+                console.log(login)
                 setIsLoggedIn(true);
             } catch (error) {
                 if (error.code === 409) {
